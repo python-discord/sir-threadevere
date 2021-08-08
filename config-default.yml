@@ -3,7 +3,7 @@ bot:
     token:          !ENV "BOT_TOKEN"
     name:           "Thread Bot"
 
-    stats: 
+    stats:
         presence_update_timeout:    300
         statsd_host:                "graphite.default.svc.cluster.local"
 
