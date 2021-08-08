@@ -1,0 +1,41 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[tool.poetry]
+name = "thread-bot"
+version = "1.0.0"
+description = "A bot purely to be our thread testing ground until d.py 2.0 is released fully."
+authors = ["Python Discord <info@pythondiscord.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9.6"
+statsd = "^=3.3.0"
+"discord.py" = {url = "https://github.com/Rapptz/discord.py/archive/master.zip"}
+loguru = "^0.5.3"
+pyyaml = "^=5.4.1"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.9.2"
+flake8-annotations = "^2.6.2"
+flake8-bugbear = "^21.4.3"
+flake8-docstrings = "^1.6"
+flake8-import-order = "^0.18.1"
+flake8-string-format = "^0.3.0"
+flake8-tidy-imports = "^4.3"
+flake8-todo = "^0.7"
+pep8-naming = "^0.11.1"
+pre-commit = "^2.13.0"
+taskipy = "^1.8.1"
+python-dotenv = "^0.19.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+start = "python -m thread_bot"
+lint = "pre-commit run --all-files"
+precommit = "pre-commit install"
