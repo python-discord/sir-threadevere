@@ -4,16 +4,16 @@ x-restart-policy: &restart_policy
   restart: unless-stopped
 
 services:
-  thread_bot:
+  thread-bot:
     << : *restart_policy
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: thread_bot
+    container_name: thread-bot
     init: true
 
     env_file:
       - .env
 
     volumes:
-      - .:/thread_bot
+      - .:/bot

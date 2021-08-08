@@ -3,7 +3,7 @@ import inspect
 import pkgutil
 from typing import Iterator, NoReturn
 
-from thread_bot import exts
+from bot import exts
 
 
 def unqualify(name: str) -> str:

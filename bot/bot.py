@@ -5,7 +5,8 @@ import socket
 import discord
 from discord import Embed
 from discord.ext import commands
-from thread_bot import async_stats, constants
+
+from bot import async_stats, constants
 
 log = logging.getLogger(__name__)
 LOCALHOST = "127.0.0.1"
@@ -81,7 +82,7 @@ class ThreadBot(commands.Bot):
     def load_extensions(self) -> None:
         """Load all enabled extensions."""
         # Must be done here to avoid a circular import.
-        from thread_bot.utils.extensions import EXTENSIONS
+        from bot.utils.extensions import EXTENSIONS
 
         extensions = set(EXTENSIONS)  # Create a mutable copy.
         for extension in extensions:

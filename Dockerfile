@@ -8,7 +8,7 @@ ENV PIP_NO_CACHE_DIR=false \
 RUN pip install -U poetry
 
 # Create the working directory
-WORKDIR /thread_bot
+WORKDIR /bot
 
 # Install project dependencies
 COPY pyproject.toml poetry.lock ./
@@ -23,4 +23,4 @@ ENV GIT_SHA=$git_sha
 # Copy the source code in last to optimize rebuilding the image
 COPY . .
 
-CMD ["python", "-m", "thread_bot"]
+CMD ["python", "-m", "bot"]

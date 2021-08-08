@@ -2,7 +2,7 @@
 *
 
 # Make exceptions for what's needed
-!thread-bot
+!bot
 !pyproject.toml
 !poetry.lock
 !LICENSE

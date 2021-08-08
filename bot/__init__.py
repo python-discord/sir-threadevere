@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 import loguru
 
 if TYPE_CHECKING:
-    from thread_bot.thread_bot import ThreadBot
+    from bot.bot import ThreadBot
 
 logger = loguru.logger.opt(colors=True)
 logger.opt = partial(logger.opt, colors=True)
