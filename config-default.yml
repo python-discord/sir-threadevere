@@ -1,0 +1,25 @@
+bot:
+    prefix:         "&"
+    token:          !ENV "BOT_TOKEN"
+    name:           "Thread Bot"
+
+    stats: 
+        presence_update_timeout:    300
+        statsd_host:                "graphite.default.svc.cluster.local"
+
+
+guild:
+    id:                     267624335836053506
+
+    channels:
+        dev_log:            622895325144940554
+        nomination_voting:  822853512709931008
+
+    roles:
+        admins:             267628507062992896
+        helpers:            267630620367257601
+        moderators:         831776746206265384
+        mod_team:           267629731250176001
+
+config:
+    required_keys: ['bot.token']
