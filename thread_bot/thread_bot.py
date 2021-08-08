@@ -76,7 +76,6 @@ class ThreadBot(commands.Bot):
             case_insensitive=True,
             allowed_mentions=discord.AllowedMentions(everyone=False, roles=allowed_roles),
             intents=intents,
-            help_command=None,
         )
 
     def load_extensions(self) -> None:
