@@ -1,14 +1,12 @@
 import asyncio
-import logging
 import socket
 
 import discord
 from discord import Embed
 from discord.ext import commands
 
-from bot import async_stats, constants
+from bot import async_stats, constants, logger
 
-log = logging.getLogger(__name__)
 LOCALHOST = "127.0.0.1"
 
 
@@ -39,13 +37,13 @@ class ThreadBot(commands.Bot):
     def _connect_statsd(self, statsd_url: str, retry_after: int = 2, attempt: int = 1) -> None:
         """Callback used to retry a connection to statsd if it should fail."""
         if attempt >= 8:
-            log.error("Reached 8 attempts trying to reconnect AsyncStatsClient. Aborting")
+            logger.error("Reached 8 attempts trying to reconnect AsyncStatsClient. Aborting")
             return
 
         try:
             self.stats = async_stats.AsyncStatsClient(self.loop, statsd_url, 8125, prefix="bot")
         except socket.gaierror:
-            log.warning(f"Statsd client failed to connect (Attempt(s): {attempt})")
+            logger.warning(f"Statsd client failed to connect (Attempt(s): {attempt})")
             # Use a fallback strategy for retrying, up to 8 times.
             self._statsd_timerhandle = self.loop.call_later(
                 retry_after,
@@ -91,14 +89,14 @@ class ThreadBot(commands.Bot):
     def add_cog(self, cog: commands.Cog) -> None:
         """Adds a "cog" to the bot and logs the operation."""
         super().add_cog(cog)
-        log.info(f"Cog loaded: {cog.qualified_name}")
+        logger.info(f"Cog loaded: {cog.qualified_name}")
 
     async def check_channels(self) -> None:
         """Verifies that all channel constants refer to channels which exist."""
         await self.wait_until_guild_available()
 
         if constants.DEBUG_MODE:
-            log.info("Skipping Channels Check.")
+            logger.info("Skipping Channels Check.")
             return
 
         all_channels_ids = [channel.id for channel in self.get_all_channels()]
@@ -106,7 +104,7 @@ class ThreadBot(commands.Bot):
             if name.startswith("_"):
                 continue
             if channel_id not in all_channels_ids:
-                log.error(f'Channel "{name}" with ID {channel_id} missing')
+                logger.error(f'Channel "{name}" with ID {channel_id} missing')
 
     async def send_log(self, title: str, details: str = None) -> None:
         """Send an embed message to the dev_log channel."""
@@ -114,11 +112,11 @@ class ThreadBot(commands.Bot):
         dev_log = self.get_channel(constants.Channels.dev_log)
 
         if not dev_log:
-            log.info(f"Fetching dev_log channel as it wasn't found in the cache (ID: {constants.Channels.dev_log})")
+            logger.info(f"Fetching dev_log channel as it wasn't found in the cache (ID: {constants.Channels.dev_log})")
             try:
                 dev_log = await self.fetch_channel(constants.Channels.dev_log)
             except discord.HTTPException as discord_exc:
-                log.exception("Fetch failed", exc_info=discord_exc)
+                logger.exception("Fetch failed", exc_info=discord_exc)
                 return
 
         embed = Embed(description=details)
@@ -137,7 +135,7 @@ class ThreadBot(commands.Bot):
             return
 
         if not guild.roles or not guild.members or not guild.channels:
-            log.warning("Guild available event was dispatched but the cache appears to still be empty!")
+            logger.warning("Guild available event was dispatched but the cache appears to still be empty!")
             return
 
         self._guild_available.set()
@@ -161,7 +159,7 @@ class ThreadBot(commands.Bot):
     async def close(self) -> None:
         """Close the Discord connection and statsd client."""
         # Wait until all tasks that have to be completed before bot is closing is done
-        log.trace("Waiting for tasks before closing.")
+        logger.trace("Waiting for tasks before closing.")
         await asyncio.gather(*self.closing_tasks)
 
         await super().close()
