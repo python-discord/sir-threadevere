@@ -12,6 +12,7 @@ their default values from `config-default.yml`.
 
 import os
 from collections.abc import Mapping
+from enum import Enum
 from pathlib import Path
 
 import yaml
@@ -237,12 +238,20 @@ class Roles(metaclass=YAMLGetter):
     mod_team: int
 
 
+class ThreadArchiveTimes(Enum):
+    HOUR = 60
+    DAY = 1440
+    THREE_DAY = 4230
+    WEEK = 10080
+
+
 staff_roles = [
     Roles.admins,
     Roles.mod_team,
     Roles.moderators,
     Roles.helpers
 ]
+
 # Debug mode
 DEBUG_MODE: bool = os.environ.get("DEBUG", "false").lower() == "true"
 
