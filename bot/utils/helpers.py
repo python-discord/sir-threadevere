@@ -43,16 +43,16 @@ async def get_thread_from_message_id(
     channel: discord.TextChannel,
     cached_messages: list[discord.Message]
 ) -> Optional[discord.Thread]:
-    """Returns the thread linked to the given message id."""
+    """Attempt to find the thread linked to the given message id."""
     def predicate(message: discord.Message) -> bool:
-        """Returns true if `message` is the thread_starter_message for the `message_id`."""
+        """Checks if `message` is the thread_starter_message for the `message_id`."""
         return (
             message.reference
             and message.reference.message_id == message_id
             and isinstance(message.channel, discord.Thread)
         )
 
-    # Try and find the thread start messag ein message cache.
+    # Try and find the thread start message in message cache.
     # Use a chunked find as this many checks could block for too long.
     if message := await chunked_find(predicate, cached_messages, chunk_size=200):
         logger.info("Thread found in message cache!")
@@ -67,5 +67,6 @@ async def get_thread_from_message_id(
     for thread in await channel.active_threads():
         if found := await _check_first_message_referencing(thread, message_id):
             logger.info("Thread found in fetched threads!")
-            return found
+            return thread
+
     return None
