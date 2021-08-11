@@ -12,6 +12,7 @@ their default values from `config-default.yml`.
 
 import os
 from collections.abc import Mapping
+from enum import Enum
 from pathlib import Path
 
 import yaml
@@ -237,12 +238,23 @@ class Roles(metaclass=YAMLGetter):
     mod_team: int
 
 
-staff_roles = [
+class ThreadArchiveTimes(Enum):
+    HOUR = 60
+    DAY = 1440
+    THREE_DAY = 4230
+    WEEK = 10080
+
+
+STAFF_ROLES = (
     Roles.admins,
     Roles.mod_team,
     Roles.moderators,
     Roles.helpers
-]
+)
+
+# Amount of elements in each chunk of a sequence when using bot.utils.helpers.chunked_find
+CHUNKED_FIND_CHUNK_SIZE = 200
+
 # Debug mode
 DEBUG_MODE: bool = os.environ.get("DEBUG", "false").lower() == "true"
 
