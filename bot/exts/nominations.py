@@ -38,6 +38,8 @@ class Nominations(commands.Cog):
             return  # Ignore messages not in the voting channel
 
         if match := NOMINATION_MESSAGE_REGEX.match(message.content):
+            if self.nominated_member_name:
+                logger.error("New vote found, but we still have a name cached! Did two votes come in at the same time?")
             self.nominated_member_name = match.group(1)
 
         if not message.content.endswith(NOMINATION_ENDING_TEXT):
