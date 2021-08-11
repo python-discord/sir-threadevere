@@ -30,17 +30,10 @@ async def chunked_find(
     return None
 
 
-<<<<<<< HEAD
-async def _check_first_message_referencing(thread: discord.Thread, message_id: int) -> Optional[discord.Thread]:
-    """Returns a thread if the thread_starter_message in `thread` references the message_id."""
-=======
 async def _check_first_message_referencing(thread: discord.Thread, message_id: int) -> bool:
     """Check if the thread_starter_message of `thread` references the given `message_id`."""
->>>>>>> 2e8797e... Improve comments and docstrings in nomination cog and helper functions
     messages = await thread.history(limit=1, oldest_first=True).flatten()
-    if messages[0].reference.message_id == message_id:
-        return thread
-    return None
+    return messages[0].reference.message_id == message_id
 
 
 async def get_thread_from_message_id(
@@ -64,13 +57,13 @@ async def get_thread_from_message_id(
         return message.channel
 
     for thread in channel.threads:  # Thread may be in cache
-        if found := await _check_first_message_referencing(thread, message_id):
+        if await _check_first_message_referencing(thread, message_id):
             logger.info("Thread found in thread cache!")
-            return found
+            return thread
 
     logger.info("Message not found in either cache, fetching all threads...")
     for thread in await channel.active_threads():
-        if found := await _check_first_message_referencing(thread, message_id):
+        if await _check_first_message_referencing(thread, message_id):
             logger.info("Thread found in fetched threads!")
             return thread
 
