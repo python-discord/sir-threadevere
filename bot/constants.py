@@ -252,6 +252,9 @@ STAFF_ROLES = (
     Roles.helpers
 )
 
+# Amount of elements in each chunk of a sequence when using bot.utils.helpers.chunked_find
+CHUNKED_FIND_CHUNK_SIZE = 200
+
 # Debug mode
 DEBUG_MODE: bool = os.environ.get("DEBUG", "false").lower() == "true"
 

@@ -4,7 +4,7 @@ from typing import Any, Callable, Iterable, Optional, TypeVar
 import discord
 import more_itertools
 
-from bot import logger
+from bot import constants, logger
 
 T = TypeVar('T')
 
@@ -30,8 +30,13 @@ async def chunked_find(
     return None
 
 
+<<<<<<< HEAD
 async def _check_first_message_referencing(thread: discord.Thread, message_id: int) -> Optional[discord.Thread]:
     """Returns a thread if the thread_starter_message in `thread` references the message_id."""
+=======
+async def _check_first_message_referencing(thread: discord.Thread, message_id: int) -> bool:
+    """Check if the thread_starter_message of `thread` references the given `message_id`."""
+>>>>>>> 2e8797e... Improve comments and docstrings in nomination cog and helper functions
     messages = await thread.history(limit=1, oldest_first=True).flatten()
     if messages[0].reference.message_id == message_id:
         return thread
@@ -54,7 +59,7 @@ async def get_thread_from_message_id(
 
     # Try and find the thread start message in message cache.
     # Use a chunked find as this many checks could block for too long.
-    if message := await chunked_find(predicate, cached_messages, chunk_size=200):
+    if message := await chunked_find(predicate, cached_messages, chunk_size=constants.CHUNKED_FIND_CHUNK_SIZE):
         logger.info("Thread found in message cache!")
         return message.channel
 
