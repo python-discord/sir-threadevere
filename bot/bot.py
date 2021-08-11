@@ -60,7 +60,7 @@ class ThreadBot(commands.Bot):
     def create(cls) -> "ThreadBot":
         """Create and return an instance of a ThreadBot."""
         loop = asyncio.get_event_loop()
-        allowed_roles = [discord.Object(id_) for id_ in constants.staff_roles]
+        allowed_roles = [discord.Object(id_) for id_ in constants.STAFF_ROLES]
 
         intents = discord.Intents.none()
         intents.guild_messages = True

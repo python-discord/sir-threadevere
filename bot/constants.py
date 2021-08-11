@@ -245,12 +245,12 @@ class ThreadArchiveTimes(Enum):
     WEEK = 10080
 
 
-staff_roles = [
+STAFF_ROLES = (
     Roles.admins,
     Roles.mod_team,
     Roles.moderators,
     Roles.helpers
-]
+)
 
 # Debug mode
 DEBUG_MODE: bool = os.environ.get("DEBUG", "false").lower() == "true"
