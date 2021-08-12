@@ -47,7 +47,7 @@ class Nominations(commands.Cog):
         elif not self.nominated_member_name:
             logger.error("Valid end message found, but no cached member name to create thread!")
 
-        thread = await message.start_thread(
+        thread = await message.create_thread(
             name=f"Nomination - {self.nominated_member_name}",
             auto_archive_duration=self.archive_time
         )

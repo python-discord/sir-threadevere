@@ -196,14 +196,14 @@ flake8 = "*"
 
 [[package]]
 name = "flake8-tidy-imports"
-version = "4.3.0"
+version = "4.4.1"
 description = "A flake8 plugin that helps you write tidier imports."
 category = "dev"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-flake8 = ">=3.0,<3.2.0 || >3.2.0,<4"
+flake8 = ">=3.8.0,<4"
 
 [[package]]
 name = "flake8-todo"
@@ -445,7 +445,7 @@ python-versions = "*"
 
 [[package]]
 name = "virtualenv"
-version = "20.7.1"
+version = "20.7.2"
 description = "Virtual Python Environment builder"
 category = "dev"
 optional = false
@@ -592,8 +592,8 @@ flake8-string-format = [
     {file = "flake8_string_format-0.3.0-py2.py3-none-any.whl", hash = "sha256:812ff431f10576a74c89be4e85b8e075a705be39bc40c4b4278b5b13e2afa9af"},
 ]
 flake8-tidy-imports = [
-    {file = "flake8-tidy-imports-4.3.0.tar.gz", hash = "sha256:e66d46f58ed108f36da920e7781a728dc2d8e4f9269e7e764274105700c0a90c"},
-    {file = "flake8_tidy_imports-4.3.0-py3-none-any.whl", hash = "sha256:d6e64cb565ca9474d13d5cb3f838b8deafb5fed15906998d4a674daf55bd6d89"},
+    {file = "flake8-tidy-imports-4.4.1.tar.gz", hash = "sha256:c18b3351b998787db071e766e318da1f0bd9d5cecc69c4022a69e7aa2efb2c51"},
+    {file = "flake8_tidy_imports-4.4.1-py3-none-any.whl", hash = "sha256:631a1ba9daaedbe8bb53f6086c5a92b390e98371205259e0e311a378df8c3dc8"},
 ]
 flake8-todo = [
     {file = "flake8-todo-0.7.tar.gz", hash = "sha256:6e4c5491ff838c06fe5a771b0e95ee15fc005ca57196011011280fc834a85915"},
@@ -780,8 +780,8 @@ typing-extensions = [
     {file = "typing_extensions-3.10.0.0.tar.gz", hash = "sha256:50b6f157849174217d0656f99dc82fe932884fb250826c18350e159ec6cdf342"},
 ]
 virtualenv = [
-    {file = "virtualenv-20.7.1-py2.py3-none-any.whl", hash = "sha256:73863dc3be1efe6ee638e77495c0c195a6384ae7b15c561f3ceb2698ae7267c1"},
-    {file = "virtualenv-20.7.1.tar.gz", hash = "sha256:57bcb59c5898818bd555b1e0cfcf668bd6204bc2b53ad0e70a52413bd790f9e4"},
+    {file = "virtualenv-20.7.2-py2.py3-none-any.whl", hash = "sha256:e4670891b3a03eb071748c569a87cceaefbf643c5bac46d996c5a45c34aa0f06"},
+    {file = "virtualenv-20.7.2.tar.gz", hash = "sha256:9ef4e8ee4710826e98ff3075c9a4739e2cb1040de6a2a8d35db0055840dc96a0"},
 ]
 win32-setctime = [
     {file = "win32_setctime-1.0.3-py3-none-any.whl", hash = "sha256:dc925662de0a6eb987f0b01f599c01a8236cb8c62831c22d9cada09ad958243e"},
