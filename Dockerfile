@@ -4,6 +4,11 @@ FROM python:3.9-slim
 ENV PIP_NO_CACHE_DIR=false \
     POETRY_VIRTUALENVS_CREATE=false
 
+# Git is required to install a pinned version of d.py master
+RUN apt-get update && apt-get install -y \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install poetry
 RUN pip install -U poetry
 
