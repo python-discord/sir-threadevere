@@ -238,6 +238,16 @@ class Roles(metaclass=YAMLGetter):
     mod_team: int
 
 
+class Colours(metaclass=YAMLGetter):
+    section = "style"
+    subsection = "colours"
+
+    success: int
+    info: int
+    warning: int
+    error: int
+
+
 class ThreadArchiveTimes(Enum):
     HOUR = 60
     DAY = 1440

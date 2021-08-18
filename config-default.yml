@@ -21,5 +21,12 @@ guild:
         moderators:         831776746206265384
         mod_team:           267629731250176001
 
+style:
+    colours:
+        success: 0x68c290
+        info: 0x3775a8
+        warning: 0xf9cb54
+        error: 0xcd6d6d
+
 config:
     required_keys: ['bot.token']
