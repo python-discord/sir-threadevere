@@ -13,7 +13,8 @@ class ErrorHandler(Cog):
     def __init__(self, bot: ThreadBot):
         self.bot = bot
 
-    def _get_error_embed(self, title: str, body: str) -> Embed:
+    @staticmethod
+    def _get_error_embed(title: str, body: str) -> Embed:
         """Return an embed that contains the exception."""
         return Embed(
             title=title,
