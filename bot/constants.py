@@ -236,6 +236,31 @@ class Roles(metaclass=YAMLGetter):
     helpers: int
     moderators: int
     mod_team: int
+    core_developers: int
+
+
+class URLs(metaclass=YAMLGetter):
+    section = "urls"
+
+    github_bot_repo: str
+
+
+class Emojis(metaclass=YAMLGetter):
+    section = "style"
+    subsection = "emojis"
+
+    status_online: str
+    status_offline: str
+
+
+class Colours(metaclass=YAMLGetter):
+    section = "style"
+    subsection = "colours"
+
+    success: int
+    info: int
+    warning: int
+    error: int
 
 
 class ThreadArchiveTimes(Enum):
@@ -250,6 +275,12 @@ STAFF_ROLES = (
     Roles.mod_team,
     Roles.moderators,
     Roles.helpers
+)
+
+MODERATION_ROLES = (
+    Roles.admins,
+    Roles.mod_team,
+    Roles.moderators
 )
 
 # Amount of elements in each chunk of a sequence when using bot.utils.helpers.chunked_find

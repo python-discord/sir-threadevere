@@ -20,6 +20,20 @@ guild:
         helpers:            267630620367257601
         moderators:         831776746206265384
         mod_team:           267629731250176001
+        core_developers:    587606783669829632
+
+urls:
+    github_bot_repo: "https://github.com/python-discord/thread-bot"
+
+style:
+    emojis:
+        status_online:  "<:status_online:470326272351010816>"
+        status_offline: "<:status_offline:470326266537705472>"
+    colours:
+        success: 0x68c290
+        info: 0x3775a8
+        warning: 0xf9cb54
+        error: 0xcd6d6d
 
 config:
     required_keys: ['bot.token']
