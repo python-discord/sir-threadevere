@@ -5,10 +5,10 @@ from typing import Optional, Tuple, Union
 from discord import Embed, utils
 from discord.ext import commands
 
-from bot.bot import ThreadBot
+from bot.bot import ThreadBot, logger
 from bot.constants import URLs
 
-SourceType = Union[commands.HelpCommand, commands.Command, commands.Cog, str, commands.ExtensionNotLoaded]
+SourceType = Union[commands.HelpCommand, commands.Command, commands.Cog, str]
 
 
 class SourceConverter(commands.Converter):
@@ -28,18 +28,10 @@ class SourceConverter(commands.Converter):
         if cmd:
             return cmd
 
-        tags_cog = ctx.bot.get_cog("Tags")
-        show_tag = True
-
-        if not tags_cog:
-            show_tag = False
-        elif argument.lower() in tags_cog._cache:
-            return argument.lower()
-
         escaped_arg = utils.escape_markdown(argument)
 
         raise commands.BadArgument(
-            f"Unable to convert '{escaped_arg}' to valid command{', tag,' if show_tag else ''} or Cog."
+            f"Unable to convert '{escaped_arg}' to valid command or Cog."
         )
 
 
@@ -58,7 +50,7 @@ class BotSource(commands.Cog):
             embed.set_thumbnail(url="https://avatars1.githubusercontent.com/u/9919")
             await ctx.send(embed=embed)
             return
-
+        logger.info(type(source_item))
         embed = await self.build_embed(source_item)
         await ctx.send(embed=embed)
 
