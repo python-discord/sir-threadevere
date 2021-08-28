@@ -12,11 +12,12 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.9.6"
-statsd = "^=3.3.0"
-"discord.py" = { git = "https://github.com/Rapptz/discord.py.git", branch = "master", rev = "1e17b7f"}
+statsd = "^3.3.0"
+"discord.py" = {url = "https://github.com/Rapptz/discord.py/archive/master.zip"}
 loguru = "^0.5.3"
-pyyaml = "^=5.4.1"
+pyyaml = "^5.4.1"
 more-itertools = "^8.8.0"
+aiodns = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.2"
