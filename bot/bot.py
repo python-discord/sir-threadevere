@@ -1,6 +1,8 @@
 import asyncio
 import socket
+from typing import Optional
 
+import aiohttp
 import discord
 from discord import Embed
 from discord.ext import commands
@@ -19,13 +21,14 @@ class ThreadBot(commands.Bot):
         super().__init__(**kwargs)
         self._guild_available = asyncio.Event()
 
-        statsd_url = constants.Stats.statsd_host
+        self.http_session: Optional[aiohttp.ClientSession] = None
+        self._connector: Optional[aiohttp.TCPConnector] = None
+        self._resolver: Optional[aiohttp.AsyncResolver] = None
 
-        if constants.DEBUG_MODE:
-            # Since statsd is UDP, there are no errors for sending to a down port.
-            # For this reason, setting the statsd host to 127.0.0.1 for development
-            # will effectively disable stats.
-            statsd_url = LOCALHOST
+        # Since statsd is UDP, there are no errors for sending to a down port.
+        # For this reason, setting the statsd host to 127.0.0.1 for development
+        # will effectively disable stats.
+        statsd_url = LOCALHOST if constants.DEBUG_MODE else constants.Stats.statsd_host
 
         self._statsd_timerhandle: asyncio.TimerHandle = None
         self.stats = async_stats.AsyncStatsClient(self.loop, LOCALHOST)
@@ -161,6 +164,15 @@ class ThreadBot(commands.Bot):
 
         await super().close()
 
+        if self.http_session:
+            await self.http_session.close()
+
+        if self._connector:
+            await self._connector.close()
+
+        if self._resolver:
+            await self._resolver.close()
+
         if self.stats._transport:
             self.stats._transport.close()
 
@@ -169,5 +181,21 @@ class ThreadBot(commands.Bot):
 
     async def login(self, *args, **kwargs) -> None:
         """Re-create the stats socket before logging into Discord."""
+        # Use asyncio for DNS resolution instead of threads so threads aren't spammed.
+        self._resolver = aiohttp.AsyncResolver()
+
+        # Use AF_INET as its socket family to prevent HTTPS related problems both locally
+        # and in production.
+        self._connector = aiohttp.TCPConnector(
+            resolver=self._resolver,
+            family=socket.AF_INET,
+        )
+
+        # Client.login() will call HTTPClient.static_login() which will create a session using
+        # this connector attribute.
+        self.http.connector = self._connector
+
+        self.http_session = aiohttp.ClientSession(connector=self._connector)
+
         await self.stats.create_socket()
         await super().login(*args, **kwargs)
