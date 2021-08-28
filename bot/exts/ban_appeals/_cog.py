@@ -7,6 +7,7 @@ from discord.ext import commands
 
 from bot import constants, logger
 from bot.bot import ThreadBot
+from bot.exts import ban_appeals
 from bot.exts.ban_appeals import BASE_RESPONSE, _api_handlers, _models
 
 
@@ -72,6 +73,16 @@ class BanAppeals(commands.Cog):
         embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar.url)
         await self.appeal_channel.send("New ban appeal!", embed=embed)
         await ctx.message.add_reaction("✅")
+
+    @commands.has_any_role(*constants.MODERATION_ROLES)
+    @ban_appeal.command(name="responses", aliases=("get", "list"))
+    async def list_responses(self, ctx: commands.Context, response: t.Optional[_models.AppealResponse]) -> None:
+        """List all available canned responses. If a response name is given, output the contents of that response."""
+        if response:
+            await ctx.send(response)
+            return
+        response_keys = [f"`{key}`" for key in ban_appeals.APPEAL_RESPONSES]
+        await ctx.send(f"Response options are: {', '.join(response_keys)}")
 
     @commands.has_any_role(constants.Roles.admins)
     @ban_appeal.command(name="respond", aliases=("response",))
