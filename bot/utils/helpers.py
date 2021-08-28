@@ -62,7 +62,10 @@ async def get_thread_from_message_id(
             return thread
 
     logger.info("Message not found in either cache, fetching all threads...")
-    for thread in await channel.active_threads():
+    for thread in await channel.guild.active_threads():
+        if thread.parent != channel:
+            continue
+
         if await _check_first_message_referencing(thread, message_id):
             logger.info("Thread found in fetched threads!")
             return thread
