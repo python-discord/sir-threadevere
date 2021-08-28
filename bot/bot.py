@@ -117,7 +117,7 @@ class ThreadBot(commands.Bot):
                 return
 
         embed = Embed(description=details)
-        embed.set_author(name=title, icon_url=self.user.avatar.url)
+        embed.set_author(name=title, icon_url=self.user.display_avatar.url)
 
         await dev_log.send(embed=embed)
 
