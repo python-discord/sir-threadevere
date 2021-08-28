@@ -226,6 +226,7 @@ class Channels(metaclass=YAMLGetter):
 
     nomination_voting: int
     dev_log: int
+    appeals: int
 
 
 class Roles(metaclass=YAMLGetter):
@@ -243,6 +244,7 @@ class URLs(metaclass=YAMLGetter):
     section = "urls"
 
     github_bot_repo: str
+    forms: str
 
 
 class Emojis(metaclass=YAMLGetter):
@@ -261,6 +263,12 @@ class Colours(metaclass=YAMLGetter):
     info: int
     warning: int
     error: int
+
+
+class Secrets(metaclass=YAMLGetter):
+    section = "secrets"
+
+    forms_token: str
 
 
 class ThreadArchiveTimes(Enum):
