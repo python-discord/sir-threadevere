@@ -1,6 +1,6 @@
 bot:
     prefix:         "&"
-    token:          !ENV "BOT_TOKEN"
+    token: !ENV     "BOT_TOKEN"
     name:           "Thread Bot"
 
     stats:

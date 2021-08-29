@@ -14,7 +14,7 @@ NOMINATION_MESSAGE_REGEX = re.compile(
 )
 
 # When nominations are posted manually, the Discord message box standarises the unicode emojis to :thumbsup:
-NOMINATION_ENDING_TEXT = "react 👍 for approval, or 👎 for disapproval*."
+NOMINATION_ENDING_TEXT = "react :+1: for approval, or :-1: for disapproval*."
 
 
 class Nominations(commands.Cog):
