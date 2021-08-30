@@ -287,7 +287,7 @@ MODERATION_ROLES = (
 CHUNKED_FIND_CHUNK_SIZE = 200
 
 # Debug mode
-DEBUG_MODE: bool = os.environ.get("DEBUG", "false").lower() == "true"
+DEBUG_MODE: bool = os.environ.get("DEBUG", "true").lower() == "true"
 
 # Bot replies
 NEGATIVE_REPLIES = [
