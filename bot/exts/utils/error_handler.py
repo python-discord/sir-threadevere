@@ -51,6 +51,9 @@ class ErrorHandler(Cog):
             await self.handle_check_failure(ctx, e)
         elif isinstance(e, errors.CommandOnCooldown):
             await ctx.send(e)
+        elif isinstance(e, errors.CommandNotFound):
+            # Silently fail if command doesn't exist
+            return
         elif not isinstance(e, errors.DisabledCommand):
             # MaxConcurrencyReached, ExtensionError
             await self.handle_unexpected_error(ctx, e)
