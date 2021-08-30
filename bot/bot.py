@@ -98,7 +98,7 @@ class ThreadBot(commands.Bot):
 
         all_channels_ids = [channel.id for channel in self.get_all_channels()]
         for name, channel_id in vars(constants.Channels).items():
-            if name in ("section", "subsection"):
+            if name in ("section", "subsection") or name.startswith("__"):
                 continue
             if channel_id not in all_channels_ids:
                 logger.error(f'Channel "{name}" with ID {channel_id} missing')
