@@ -156,7 +156,7 @@ class ThreadBot(commands.Bot):
     async def close(self) -> None:
         """Close the Discord connection and statsd client."""
         # Wait until all tasks that have to be completed before bot is closing is done
-        logger.trace("Waiting for tasks before closing.")
+        logger.info("Waiting for tasks before closing.")
         await asyncio.gather(*self.closing_tasks)
 
         await super().close()

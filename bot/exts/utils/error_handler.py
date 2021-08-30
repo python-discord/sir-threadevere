@@ -42,7 +42,7 @@ class ErrorHandler(Cog):
         command = ctx.command
 
         if hasattr(e, "handled"):
-            logger.trace(f"Command {command} had its error already handled locally; ignoring.")
+            logger.info(f"Command {command} had its error already handled locally; ignoring.")
             return
 
         if isinstance(e, errors.UserInputError):
