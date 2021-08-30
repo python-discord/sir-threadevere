@@ -18,7 +18,7 @@ At any point, if you want to test your code conforms to the linter, you can run 
 The below env vars are available to be set in a `.env` file in the project's root directory.
 
  - `BOT_TOKEN` (required) - Your Discord bot token
- - `DEBUG` - `true` or `false` used to control debug mode
+ - `DEBUG` - `true` or `false` used to control debug mode (true by default)
 
 # Config file
 
