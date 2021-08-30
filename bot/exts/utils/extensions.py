@@ -79,6 +79,7 @@ class Extensions(commands.Cog):
         """Handle BadArgument errors locally to prevent the help command from showing."""
         if isinstance(error, commands.BadArgument):
             await ctx.send(str(error))
+            error.handled = True
             return
         logger.error(f"Unhandled error in ext cog: {error}")
 
