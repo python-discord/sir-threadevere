@@ -1,7 +1,7 @@
 bot:
     prefix:         "&"
     token: !ENV     "BOT_TOKEN"
-    name:           "Thread Bot"
+    name:           "Sir Threadevere"
 
     stats:
         presence_update_timeout:    300
@@ -23,7 +23,7 @@ guild:
         core_developers:    587606783669829632
 
 urls:
-    github_bot_repo: "https://github.com/python-discord/thread-bot"
+    github_bot_repo: "https://github.com/python-discord/sir-threadevere"
 
 style:
     emojis:
