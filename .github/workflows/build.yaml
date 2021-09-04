@@ -93,6 +93,6 @@ jobs:
         uses: Azure/k8s-deploy@v1
         with:
           manifests: |
-            kubernetes/thread-bot/deployment.yaml
+            kubernetes/namespaces/default/thread-bot/deployment.yaml
           images: 'ghcr.io/python-discord/thread-bot:${{ steps.sha_tag.outputs.tag }}'
           kubectl-version: 'latest'
