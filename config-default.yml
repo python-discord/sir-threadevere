@@ -14,6 +14,7 @@ guild:
     channels:
         dev_log:            622895325144940554
         nomination_voting:  822853512709931008
+        appeals:            808790025688711198
 
     roles:
         admins:             267628507062992896
@@ -23,7 +24,8 @@ guild:
         core_developers:    587606783669829632
 
 urls:
-    github_bot_repo: "https://github.com/python-discord/sir-threadevere"
+    github_bot_repo:    "https://github.com/python-discord/thread-bot"
+    forms:              "http://forms-backend.default.svc.cluster.local"
 
 style:
     emojis:
@@ -34,6 +36,9 @@ style:
         info: 0x3775a8
         warning: 0xf9cb54
         error: 0xcd6d6d
+
+secrets:
+    forms_token: !ENV   "FORMS_TOKEN"
 
 config:
     required_keys: ['bot.token']

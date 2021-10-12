@@ -1,0 +1,6 @@
+{
+    "grant": "\n\nYour ban appeal has been granted, you are now unbanned in the Python Discord server.",
+    "deny": "\n\nYour ban appeal has been denied.",
+    "resetpass": "\n\nYour password has been compromised. Once you have changed your password, reply to this email and we will unban you.\nHere is a guide from Discord on how to change your password: https://support.discord.com/hc/en-us/articles/218410947-I-forgot-my-Password-Where-can-I-set-a-new-one-\n\nWe also recommend that you enable 2 factor authentication on your account, for hightened security. You can find more infomraiton about that here: https://support.discord.com/hc/en-us/articles/219576828-Setting-up-Two-Factor-Authentication",
+    "none": ""
+}
